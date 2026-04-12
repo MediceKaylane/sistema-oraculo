@@ -7,6 +7,10 @@
  *
  * @author alunolab10
  */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Oraculo {
@@ -24,7 +28,7 @@ public class Oraculo {
 
     
     public boolean loadLevel01 (){
-        boolean levelCompleto = false;
+        boolean level01Completo = false;
         int resposta = random.nextInt(99) + 1;
         System.out.println("numero sorteado:" + resposta);
         
@@ -44,7 +48,7 @@ public class Oraculo {
                 
                 if(respostaJogador == resposta){                                                    //Se o jogador acertar, a Oráculo avisa o acerto
                     InOut.MsgSemIcone("Oráculo:", "Parabéns!\n Você completou o primeiro nível");
-                    levelCompleto = true;
+                    level01Completo = true;
                     
                     if(tentativasLevel01 == 0){              //Caso o jogador acerte na primeira tentativa, equipa o item definido
                         warrior.getbolsa(6); //id item supremo
@@ -66,15 +70,48 @@ public class Oraculo {
                 }
         }
         
-        return levelCompleto;
+        return level01Completo;
     }
     
+    public boolean loadLevel02 () {
+        
+        boolean level02Completo = false;
+        
+        // Criando a tabela de pontuação
+        Map<Character, Integer> tabelaPontuacao = new HashMap<>();
 
-    
- 
-    
-    
-    
-    
-    
+        // Adicionando as pontuações
+        tabelaPontuacao.put('A', 10);
+        tabelaPontuacao.put('B', 30);
+        tabelaPontuacao.put('C', 30);
+        tabelaPontuacao.put('D', 20);
+        tabelaPontuacao.put('E', 10);
+        tabelaPontuacao.put('F', 40);
+        tabelaPontuacao.put('G', 20);
+        tabelaPontuacao.put('H', 20);
+        tabelaPontuacao.put('I', 40);
+        tabelaPontuacao.put('J', 10);
+        tabelaPontuacao.put('K', 80);
+        tabelaPontuacao.put('L', 50);
+        tabelaPontuacao.put('M', 10);
+        tabelaPontuacao.put('N', 30);
+        tabelaPontuacao.put('O', 10);
+        tabelaPontuacao.put('P', 10);
+        tabelaPontuacao.put('Q', 90);
+        tabelaPontuacao.put('R', 10);
+        tabelaPontuacao.put('S', 10);
+        tabelaPontuacao.put('T', 10);
+        tabelaPontuacao.put('U', 10);
+        tabelaPontuacao.put('V', 80);
+        tabelaPontuacao.put('W', 100);
+        tabelaPontuacao.put('X', 70);
+        tabelaPontuacao.put('Y', 100);
+        tabelaPontuacao.put('Z', 50);
+
+        
+        
+        return level02Completo;
+        
+    }
+       
 }
