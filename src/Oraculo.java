@@ -86,10 +86,10 @@ public class Oraculo {
         
         //abrindo br-sem-acentos.txt e passando para o hash dicionario
         
-        try
+        try  //try: tenta isso e se der errado joga no exception erro
         {
-            File arq = new File("br-sem-acentos.txt"); //obj aponta para o arquivo txt
-            Scanner leitorArq = new Scanner (arq); //"fopen(arq, "r");
+            File arq = new File("src/br-sem-acentos.txt"); //obj aponta para o arquivo txt
+            Scanner leitorArq = new Scanner (arq); //fopen(arq, "r");
             
             while (leitorArq.hasNextLine()) //nextline "ainda tem linha para ler?"
             {
@@ -105,7 +105,7 @@ public class Oraculo {
         }
         catch(Exception erro)
         {
-            System.out.println("opss, deu red");
+            InOut.MsgDeErro("opss, deu red", erro.getMessage());
         }
         
         // Criando a tabela de pontuação
@@ -142,24 +142,32 @@ public class Oraculo {
         //Entrada do usuario 
         int soma = 0;
             //explicacao do game com um obs palavras sem potuacao 
+            InOut.MsgSemIcone("Parabéns você chegou no nível 2!", "Agora vamos entender como o jogo funciona, ok?");
+            InOut.MsgSemIcone("Entendendo o Nível..","Neste nível você digita uma palavra.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
+            InOut.MsgSemIcone("DICA", "Tem letras que valem muitos pontos\nEstas compõem palavra mais difíceis no vocabulário.");
             
-        //1 fase, escreve o tanto que quiser até chegar a 50 pontos
+            
+        //1 fase, escreve o tanto que quiser até chegar a 100 pontos
+        InOut.MsgSemIcone("Fase 0", "Sua palavra deve ter uma pontuação total de 100 pontos\nEu sei, você não sabe os pontos de cada letra...\nEntão tente deduzir!");
         do
         {
              String palavra = InOut.leString("Insira sua palavra:").toLowerCase();
-        
-            for(char letra : palavra.toCharArray())
-            {
-                if (tabelaPontuacao.containsKey(letra))
-                {
-                    Integer valor = tabelaPontuacao.get(letra);
-                    soma += valor;
-                    System.out.println("Pontuacao" + soma);
+             
+             if(dicionario.contains(palavra))
+             {
+                 for(char letra : palavra.toCharArray()){
+                    if (tabelaPontuacao.containsKey(letra)){
+                        Integer valor = tabelaPontuacao.get(letra);
+                        soma += valor;
+                        System.out.println("Pontuacao" + soma);
+                    }
                 }
-            }
-
+             }
+             else{
+                 System.out.println("Palavra inválida!");
+             }
         }
-        while(soma < 50);
+        while(soma < 100);
        
         
         
