@@ -62,6 +62,9 @@ public class Oraculo {
         int resposta = random.nextInt(99) + 1;
         System.out.println("numero sorteado:" + resposta);
         
+        //explicar para o usuario o jogo 
+            InOut.MsgSemIcone(this.nome, "Neste nível você deve acertar qual número foi sorteado de 1 a 100");
+        
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
             
@@ -70,7 +73,8 @@ public class Oraculo {
                 System.exit(0);
             }
             
-            //explicar para o usuario o jogo (a preencher)
+            //qtnd vidas do usuario
+            InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
             
             
             
@@ -80,7 +84,7 @@ public class Oraculo {
                     InOut.MsgSemIcone(this.nome, "Parabéns!\n Você completou o primeiro nível");
                     level01Completo = true;
                     
-                    if(tentativasLevel01 == 0){              //Caso o jogador acerte na primeira tentativa, equipa o item definido
+                    if(tentativasLevel01 < 4){              //Caso o jogador acerte na primeira tentativa, equipa o item definido
                         warrior.getbolsa(6); //id item supremo
                     }
                     
@@ -96,10 +100,14 @@ public class Oraculo {
                     }
                     
                   warrior.diminuirVida();                     //Guerreiro perde uma vida e tentativas do nível 1 aumenta
+                  InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
                   tentativasLevel01++;
                 }
         }
         
+        for (int i = 0; i < 5; i++) {
+            warrior.aumentarVida();
+        }
         return level01Completo;
     }
     
@@ -116,7 +124,9 @@ public class Oraculo {
         charadas.add(new Charada("O que é, o que é:\nQuanto mais você usa, mais fino ele fica?", "lapis"));
         
         //Explicação da segunda fase
-        InOut.MsgSemIcone(this.nome, "Parabéns você chegou no nível 2!\nDeixa eu te explicar as regras:");
+        InOut.MsgSemIcone(this.nome, "Parabéns você chegou no nível 2!");
+        InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+        InOut.MsgSemIcone(this.nome, "Deixa eu te explicar as regras:");
         InOut.MsgSemIcone(this.nome, "Eu vou te dar 4 charadas, a sua tarefa é acertar as respostas de cada uma.\nSe você não acertar...\nPerde uma vida.");
         InOut.MsgSemIcone(this.nome, "As charadas são simples, qualquer um acertaria...\nVamos testar suas capacidades:");
         
@@ -248,9 +258,14 @@ public class Oraculo {
         
         //Entrada do usuario 
         int soma = 0;
+            //introducao level03
+            InOut.MsgSemIcone(this.nome, "Uau, você chegou no último nível!");
+            InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+            
+            
             //explicacao do game com um obs palavras sem potuacao 
-            InOut.MsgSemIcone(this.nome, "Uau, você chegou no último nível!\nAgora vamos entender como o jogo funciona, ok?");
-            InOut.MsgSemIcone(this.nome, "Entendendo o Nível..\nNeste nível você digita uma palavra.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
+            InOut.MsgSemIcone(this.nome, "Agora vamos entender como o jogo funciona, ok?");
+            InOut.MsgSemIcone(this.nome, "Entendendo o Nível..\nNeste nível você digita uma palavra sem pontuação.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
             InOut.MsgSemIcone("DICA", "Tem letras que valem muitos pontos\nEstas compõem palavra mais difíceis no vocabulário.");
             
             
@@ -273,6 +288,7 @@ public class Oraculo {
              else{
                  InOut.MsgDeAviso("Palavra inválida!", "Estávamos preparados para isso...\nDigite uma palavra válida");
                  warrior.diminuirVida();
+                 InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
              }
              if(warrior.getQntdVidas() == 0){
                 InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
@@ -282,7 +298,7 @@ public class Oraculo {
              if(soma >= 100){
                  InOut.MsgSemIcone("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
              }
-             else{
+             else if (soma != 0){
                  InOut.MsgSemIcone("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
              }
         }
@@ -328,6 +344,10 @@ public class Oraculo {
             if(soma < 600){
                
                 warrior.diminuirVida();
+                if(warrior.getQntdVidas() != 0){
+                    InOut.MsgSemIcone(this.nome, "Tente essa fase novamente, você vai conseguir!");
+                    InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+                }
             }
              
              
@@ -342,7 +362,7 @@ public class Oraculo {
         do
         {
             if(warrior.getQntdVidas() == 0){
-                InOut.MsgDeErro("Oráculo", "Suas vidas acabaram! Você perdeu!");        
+                InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
                 System.exit(0);
             }
             
@@ -383,6 +403,11 @@ public class Oraculo {
             
             if(soma < 300){
                 warrior.diminuirVida();
+                if(warrior.getQntdVidas() != 0){
+                    InOut.MsgSemIcone(this.nome, "Tente essa fase novamente, você vai conseguir!");
+                    InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+                }
+                
             }
              
              
@@ -392,7 +417,7 @@ public class Oraculo {
         InOut.MsgSemIcone(this.nome, "Missão concluída " + warrior.getNome() + "!\nAté a próxima jornada!");
         
         
-        return level03Completo;
+        return level03Completo = true;
         
     }
        
