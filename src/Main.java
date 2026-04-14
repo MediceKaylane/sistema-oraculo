@@ -49,6 +49,7 @@ void main() {
     
     
     oraculo.loadLevel01();
-    oraculo.loadLevel02(); 
+    oraculo.loadLevel02();
+    oraculo.loadLevel03();
     
 }

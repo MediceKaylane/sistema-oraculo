@@ -62,7 +62,7 @@ public class Guerreiro {
     
     public void getbolsa (int itemId)
     {
-        myBolsa.getItem(itemId);
+        myBolsa.equiparItem(itemId);
     }
    
 }

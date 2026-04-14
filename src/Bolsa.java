@@ -15,7 +15,7 @@ public class Bolsa {
     }
 
     
-    public void getItem (int itemId) {
+    public void equiparItem (int itemId) {
         item.get(itemId).equipar();
     }
     

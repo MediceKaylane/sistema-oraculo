@@ -29,6 +29,16 @@ public class Oraculo {
         this.warrior = warrior;
     }
     
+    //inner class pra criar as charadas da segunda fase
+    class Charada{
+        String pergunta, resposta;
+        
+        public Charada(String pergunta, String resposta){
+            this.pergunta = pergunta;
+            this.resposta = resposta;
+        }
+    }
+    
     //tratamento de erro nome oraculo
     public void getName (String name){
         this.nome = name; 
@@ -93,9 +103,90 @@ public class Oraculo {
         return level01Completo;
     }
     
-    public boolean loadLevel02 () {
+    public boolean loadLevel02(){
+        boolean levelCompleto = false, dePrimeira;
+        String respostaCharada, respostaJogador;
+        int tentativas = 0;
+        List<Charada> charadas = new ArrayList<>();
         
-        boolean level02Completo = false;
+        //Adiciona cada charada e suas respostas na lista de charadas
+        charadas.add(new Charada("O que é, o que é:\nQuanto mais você tira, maior ele fica?", "buraco"));
+        charadas.add(new Charada("O que é, o que é:\nSempre corre, mas nunca anda?", "rio"));
+        charadas.add(new Charada("O que é, o que é:\nTem cabeça e tem dente, mas não é gente?", "alho"));
+        charadas.add(new Charada("O que é, o que é:\nQuanto mais você usa, mais fino ele fica?", "lapis"));
+        
+        //Explicação da segunda fase
+        InOut.MsgSemIcone(this.nome, "Parabéns você chegou no nível 2!\nDeixa eu te explicar as regras:");
+        InOut.MsgSemIcone(this.nome, "Eu vou te dar 4 charadas, a sua tarefa é acertar as respostas de cada uma.\nSe você não acertar...\nPerde uma vida.");
+        InOut.MsgSemIcone(this.nome, "As charadas são simples, qualquer um acertaria...\nVamos testar suas capacidades:");
+        
+        //Começa as charadas
+        //Rodas o loop 4 vezes, cada vez setando a charada e resposta como a charada em sua respectiva posição dentro da lista
+        for(int i=0; i<4; i++){
+            //No início de cada charada define que o jogador ainda não acertou de primeira
+            dePrimeira = false;
+            InOut.MsgSemIcone(this.nome, charadas.get(i).pergunta);
+            respostaCharada = charadas.get(i).resposta;
+                
+            //Enquanto o jogador não acertar, a oráculo vai continuar pedindo a resposta até que ele não tenha mais vidas
+            while(true){
+                if(warrior.getQntdVidas() == 0){
+                    InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
+                    System.exit(0);
+                }
+                
+                //Recebe a resposta do jogador em letrar minúsculas e sem espaços. Ex: buraco, um buraco, o buraco, etc
+                respostaJogador = InOut.leString("Insira sua resposta (sem acentos :)):").toLowerCase().replace(" ", "");
+
+                if(respostaJogador.contains(respostaCharada)){
+                    //Caso o jogador acerte de primeira define a variavel dePrimeira como true
+                    if(tentativas == 0){
+                        dePrimeira = true;
+                    }
+                        
+                    InOut.MsgSemIcone(this.nome, "Parabéns!\nVocê acertou a " + (i+1) + "° charada");
+                    break;
+                }
+                else{
+                    //Caso o jogador erre, aumenta o numero de tentativas e diminui uma vida
+                    InOut.MsgDeErro(this.nome, "Errado, tenta de novo:");
+                    tentativas++;
+                    warrior.diminuirVida();
+                }
+            }
+                
+            //Caso o jogador tenha acertado de primeira, ele recebe um item de acordo com a charada
+            if(dePrimeira == true){
+                switch(i){
+                    case 0:
+                        warrior.getbolsa(0);
+                        break;
+                    case 1:
+                        warrior.getbolsa(2);
+                        break;
+                    case 2:
+                        warrior.getbolsa(4);
+                        break;
+                    case 3:
+                        warrior.getbolsa(3);
+                        break;
+                    }
+
+                }
+        
+        }
+        
+        //Se o jogador passou por todas as charadas, define levelCompleto como true
+        levelCompleto = true;
+        
+        InOut.MsgSemIcone(this.nome, "Você acertou todas?\nMeus parabéns, essas não eram pra qualquer um");
+        return levelCompleto;
+    }
+    
+    
+    public boolean loadLevel03 () {
+        
+        boolean level03Completo = false;
         
         //hashset p/ armazenar dicionario e a leitura ser instatanea
         Set<String> dicionario = new HashSet<>(); 
@@ -158,7 +249,7 @@ public class Oraculo {
         //Entrada do usuario 
         int soma = 0;
             //explicacao do game com um obs palavras sem potuacao 
-            InOut.MsgSemIcone(this.nome, "Parabéns você chegou no nível 2!\nAgora vamos entender como o jogo funciona, ok?");
+            InOut.MsgSemIcone(this.nome, "Uau, você chegou no último nível!\nAgora vamos entender como o jogo funciona, ok?");
             InOut.MsgSemIcone(this.nome, "Entendendo o Nível..\nNeste nível você digita uma palavra.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
             InOut.MsgSemIcone("DICA", "Tem letras que valem muitos pontos\nEstas compõem palavra mais difíceis no vocabulário.");
             
@@ -245,7 +336,7 @@ public class Oraculo {
         
         //fase precisao: digitar duas palavras acima de 300 pontos mas a palavra tem que ter no maximo 6 letras
        
-        InOut.MsgSemIcone(this.nome, "Esta fase contém 2 rodadas.\nAo total sua pontuação deve ser maior ou igual a 600");
+        InOut.MsgSemIcone(this.nome, "Esta fase contém 2 rodadas.\nAo total sua pontuação deve ser maior ou igual a 300");
         InOut.MsgSemIcone(this.nome, "Achou fácil?\nNão se empolgue..");
         InOut.MsgSemIcone(this.nome, "Sua palavra pode ter no máximo 6 letras hahaha");
         do
@@ -290,7 +381,7 @@ public class Oraculo {
                 
             }
             
-            if(soma < 600){
+            if(soma < 300){
                 warrior.diminuirVida();
             }
              
@@ -301,7 +392,7 @@ public class Oraculo {
         InOut.MsgSemIcone(this.nome, "Missão concluída " + warrior.getNome() + "!\nAté a próxima jornada!");
         
         
-        return level02Completo;
+        return level03Completo;
         
     }
        
