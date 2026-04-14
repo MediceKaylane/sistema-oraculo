@@ -29,4 +29,35 @@ public class Item {
         System.out.println("item e se esta equipado:" + tipoItem + equipado);
     }
     
+    public boolean itemEquipado(){
+        return this.equipado;
+    }
+    
+        public void efeitoAdcVida(Oraculo oraculo){
+            oraculo.getWarrior().aumentarVida();
+        }
+        
+        public char efeitoDicaPrimeiraLetra(Oraculo oraculo, int idCharada){
+            return oraculo.getCharadas().get(idCharada).resposta.charAt(0);
+        }
+        
+        public int efeitoDicaQntdLetras(Oraculo oraculo, int idCharada){
+            return oraculo.getCharadas().get(idCharada).resposta.length();
+        }
+        
+        public String efeitoDicaResposta(Oraculo oraculo, int idCharada){
+            switch(idCharada){
+                case 0:
+                    return "é redondo";
+                case 1:
+                    return "é molhado";
+                case 2:
+                    return "é um alimento";
+                case 3:
+                    return "é usado para escrever";
+                default:
+                    return "id da charada não existente";
+            }
+        }
+    
 }

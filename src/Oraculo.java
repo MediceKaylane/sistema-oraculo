@@ -23,6 +23,7 @@ public class Oraculo {
     public int tentativasLevel01 = 0;
     private String nome;
     private Guerreiro warrior;
+    private List<Charada> charadas = new ArrayList<>();
 
     public Oraculo(String nome, Guerreiro warrior) {
         this.nome = nome;
@@ -43,6 +44,15 @@ public class Oraculo {
     public void getName (String name){
         this.nome = name; 
     }
+
+    public Guerreiro getWarrior() {
+        return warrior;
+    }
+
+    public List<Charada> getCharadas() {
+        return charadas;
+    }
+    
     
     //tratamento de erro nome oraculo
     public boolean verificarNome (){
@@ -85,7 +95,7 @@ public class Oraculo {
                     level01Completo = true;
                     
                     if(tentativasLevel01 < 4){              //Caso o jogador acerte na primeira tentativa, equipa o item definido
-                        warrior.getbolsa(6); //id item supremo
+                        warrior.equiparItem(6); //id item supremo
                     }
                     
                     break;
@@ -115,7 +125,6 @@ public class Oraculo {
         boolean levelCompleto = false, dePrimeira;
         String respostaCharada, respostaJogador;
         int tentativas = 0;
-        List<Charada> charadas = new ArrayList<>();
         
         //Adiciona cada charada e suas respostas na lista de charadas
         charadas.add(new Charada("O que é, o que é:\nQuanto mais você tira, maior ele fica?", "buraco"));
@@ -133,10 +142,23 @@ public class Oraculo {
         //Começa as charadas
         //Rodas o loop 4 vezes, cada vez setando a charada e resposta como a charada em sua respectiva posição dentro da lista
         for(int i=0; i<4; i++){
+            
+            
             //No início de cada charada define que o jogador ainda não acertou de primeira
             dePrimeira = false;
             InOut.MsgSemIcone(this.nome, charadas.get(i).pergunta);
             respostaCharada = charadas.get(i).resposta;
+            
+            switch(i){
+                case 0:
+                    if(warrior.itemEquipado(6)){
+                        InOut.MsgSemIcone("Pedra Supreme", "Uma dica:\nA resposta é buraco :)");
+                    }
+                case 1:
+                    if(warrior.itemEquipado(0)){
+                        InOut.MsgSemIcone("Capacete de Ferro", "Uma dica:\nA resposta é buraco :)");
+                    }
+            }
                 
             //Enquanto o jogador não acertar, a oráculo vai continuar pedindo a resposta até que ele não tenha mais vidas
             while(true){
@@ -169,16 +191,16 @@ public class Oraculo {
             if(dePrimeira == true){
                 switch(i){
                     case 0:
-                        warrior.getbolsa(0);
+                        warrior.equiparItem(0);
                         break;
                     case 1:
-                        warrior.getbolsa(2);
+                        warrior.equiparItem(2);
                         break;
                     case 2:
-                        warrior.getbolsa(4);
+                        warrior.equiparItem(4);
                         break;
                     case 3:
-                        warrior.getbolsa(3);
+                        warrior.equiparItem(3);
                         break;
                     }
 

@@ -60,9 +60,18 @@ public class Guerreiro {
         this.qntdVidas--;
     }
     
-    public void getbolsa (int itemId)
+    public void aumentarVida(){
+        this.qntdVidas++;
+    }
+    
+    public void equiparItem (int itemId)
     {
         myBolsa.equiparItem(itemId);
+    }
+    
+    public boolean itemEquipado (int itemId)
+    {
+        return myBolsa.itemEquipado(itemId);
     }
    
 }
