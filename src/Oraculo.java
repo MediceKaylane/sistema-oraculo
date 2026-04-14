@@ -156,7 +156,15 @@ public class Oraculo {
                     }
                 case 1:
                     if(warrior.itemEquipado(0)){
-                        InOut.MsgSemIcone("Capacete de Ferro", "Uma dica:\nA resposta é buraco :)");
+                        InOut.MsgSemIcone("Capacete de Ferro", "Uma dica:\nÉ algo molhado");
+                    }
+                case 2:
+                    if(warrior.itemEquipado(2)){
+                        InOut.MsgSemIcone("Escudo de Madeira", "Uma dica:\nComeça com a");
+                    }
+                case 3:
+                    if(warrior.itemEquipado(3)){
+                        InOut.MsgSemIcone("Botas de Couro", "Uma dica:\nTem 5 letras");
                     }
             }
                 
@@ -197,10 +205,12 @@ public class Oraculo {
                         warrior.equiparItem(2);
                         break;
                     case 2:
-                        warrior.equiparItem(4);
+                        warrior.equiparItem(3);
                         break;
                     case 3:
-                        warrior.equiparItem(3);
+                        warrior.equiparItem(4);
+                        warrior.aumentarVida();
+                        InOut.MsgSemIcone("Peitoral de Malha", "Pode deixar que eu sou resistente.\nvocê ganhou mais uma vida.");
                         break;
                     }
 
@@ -211,7 +221,7 @@ public class Oraculo {
         //Se o jogador passou por todas as charadas, define levelCompleto como true
         levelCompleto = true;
         
-        InOut.MsgSemIcone(this.nome, "Você acertou todas?\nMeus parabéns, essas não eram pra qualquer um");
+        InOut.MsgSemIcone(this.nome, "Você acertou todas?\nMeus parabéns, essas não estavam tão faceis assim");
         return levelCompleto;
     }
     

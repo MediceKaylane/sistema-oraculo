@@ -37,28 +37,31 @@ public class Guerreiro {
         }
     }
 
+   //Sorteia a vida do guerreiro gerando um aleatório entre 0 e 3 e somando 9, gerando entre 9 a 12 vidas.
    public int sortearVidas(){
-       return ((random.nextInt(3))+9);                //Sorteia a vida do guerreiro gerando um aleatório entre 0 e 3 e somando 9, gerando entre
-   }                                                  //9 a 12 vidas. To ligado que vc fez diferente la usando o math.random eu acho Kaylane mas
-                                                      //não sei fazer assim :)
-    
-
-
+       return ((random.nextInt(3))+9);              
+   }                                                
+ 
+   
     public String getNome() {
         return nome;
     }
 
+    
     public int getQntdVidas() {
         return qntdVidas;
     }
 
+    
     public int getVidaInicial() {
         return vidaInicial;
     }
    
+    
     public void diminuirVida(){
         this.qntdVidas--;
     }
+    
     
     public void aumentarVida(){
         this.qntdVidas++;
