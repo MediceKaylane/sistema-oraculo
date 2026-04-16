@@ -85,7 +85,9 @@ public class Oraculo {
         System.out.println("numero sorteado:" + resposta);
         
         //explicar para o usuario o jogo 
-            InOut.iconeOraculo(this.nome, "Neste nível você deve acertar qual número foi sorteado de 1 a 100");
+            InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. Anos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
+            InOut.iconeOraculo(this.nome, "Sua saída é composta de 3 desafios: A passagem pela ruína da tribo antiga, os abismos onde a gravidade não existe e a luta contra os guardas do portal.");
+            InOut.iconeOraculo(this.nome, "No primeiro desafio você deve acertar qual número foi sorteado de 1 a 100 para a tribo liberar sua passagem para o abismo");
         
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
@@ -104,11 +106,11 @@ public class Oraculo {
             
             
             
-            int respostaJogador = InOut.leIntGuerreiro(warrior.getNome() + ", " + "qual o seu palpite?");         //Recebe o palpite do jogador
+            int respostaJogador = InOut.leIntGuerreiro(warrior.getNome() + ", " + "qual o seu palpite? (numeros de 0 a 100)");         //Recebe o palpite do jogador
             palpites.add(respostaJogador);
                 
                 if(respostaJogador == resposta){                                                    //Se o jogador acertar, a Oráculo avisa o acerto
-                    InOut.iconeOraculo(this.nome, "Parabéns!\n Você completou o primeiro nível");
+                    InOut.iconeOraculo(this.nome, "Parabéns!\n Você conseguiu atravessar a ruína! A tribo antiga te liberou!");
                     level01Completo = true;
                     
                     if(tentativasLevel01 < 4){              //Caso o jogador acerte na primeira tentativa, equipa o item definido
@@ -150,9 +152,9 @@ public class Oraculo {
         charadas.add(new Charada("O que é, o que é:\nQuanto mais você usa, mais fino ele fica?", "lapis"));
         
         //Explicação da segunda fase
-        InOut.iconeOraculo(this.nome, "Parabéns você chegou no nível 2!");
+        InOut.iconeOraculo(this.nome, "Parabéns você chegou no abismo onde a gravidade não existe! Vamos lá...");
         InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
-        InOut.iconeOraculo(this.nome, "Deixa eu te explicar as regras:");
+        InOut.iconeOraculo(this.nome, "Deixa eu te explicar as regras para resistir:");
         InOut.iconeOraculo(this.nome, "Eu vou te dar 4 charadas, a sua tarefa é acertar as respostas de cada uma.\nSe você não acertar...\nPerde uma vida.");
         InOut.iconeOraculo(this.nome, "As charadas são simples, qualquer um acertaria...\nVamos testar suas capacidades:");
         
@@ -192,7 +194,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                     
-                    InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu!");        
+                    InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu e fica no Mundo Perdido comigo!");        
                     System.exit(0);
                 }
                 
@@ -242,7 +244,7 @@ public class Oraculo {
         //Se o jogador passou por todas as charadas, define levelCompleto como true
         levelCompleto = true;
         
-        InOut.iconeOraculo(this.nome, "Você acertou todas?\nMeus parabéns, essas não estavam tão faceis assim");
+        InOut.iconeOraculo(this.nome, "Você acertou todas?\nMeus parabéns, Essas não estavam tão faceis assim! Agora você pode enfrentar os guardas do portal e ser livre!!");
         return levelCompleto;
     }
     
@@ -312,7 +314,7 @@ public class Oraculo {
         //Entrada do usuario 
         int soma = 0;
             //introducao level03
-            InOut.iconeOraculo(this.nome, "Uau, você chegou no último nível!");
+            InOut.iconeOraculo(this.nome, "Uau, você chegou no último desafio! Vamos enfrentar esses guardas!!");
             InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
             
             
@@ -423,7 +425,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                 
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu!");        
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu e fica aqui no Mundo Perdido comigo!");        
                 System.exit(0);
             }
             
@@ -475,7 +477,7 @@ public class Oraculo {
         }
         while(soma < 300);
         
-        InOut.iconeOraculo(this.nome, "Missão concluída " + warrior.getNome() + "!\nAté a próxima jornada!");
+        InOut.iconeOraculo(this.nome, "Missão concluída! Você venceu todos os desafios e tem acesso liberado ao Novo Mundo " + warrior.getNome() + "!\nAté a próxima jornada!");
         
         
         return level03Completo = true;
