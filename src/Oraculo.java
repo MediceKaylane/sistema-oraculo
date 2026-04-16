@@ -373,7 +373,7 @@ public class Oraculo {
             
             soma = 0;
             for(int i = 0; i < 3; i++){
-                String palavra = InOut.leString("Insira sua palavra:").toLowerCase();
+                String palavra = InOut.leStringOraculo("Insira sua palavra:").toLowerCase();
                 if(dicionario.contains(palavra))
                 {
                     for(char letra : palavra.toCharArray()){
@@ -384,7 +384,7 @@ public class Oraculo {
                     }  
                 }
                 else{
-                    InOut.MsgDeAviso("Palavra inválida!", "Estávamos preparados para isso...\nDigite uma palavra válida.");  
+                    InOut.iconeOraculo("Palavra inválida!", "Estávamos preparados para isso...\nDigite uma palavra válida.");  
                 }
                 
                 if(soma >= 600){
@@ -429,7 +429,7 @@ public class Oraculo {
             
             soma = 0;
             for(int i = 0; i < 2; i++){
-                String palavra = InOut.leString("Insira sua palavra:").toLowerCase();
+                String palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
                 
                 if(palavra.length() <= 6){
                     if(dicionario.contains(palavra))
