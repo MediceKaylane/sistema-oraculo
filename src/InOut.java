@@ -1,4 +1,4 @@
- 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /** 
@@ -239,6 +239,39 @@ public class InOut {
 		}while (ERRO);
 		return Entrada.charAt(0);
 	}
+        
+        
+
+        public static void iconeGuerreiro(String frase){
+
+            ImageIcon icon = new ImageIcon(
+                Guerreiro.class.getResource("/img/guerreiro.jpeg")
+            );
+
+            JOptionPane.showMessageDialog(
+                null,
+                frase,
+                "Guerreiro",
+                JOptionPane.INFORMATION_MESSAGE,
+                icon
+            );
+        }
+
+        public static void iconeOraculo(String nome, String frase){
+
+            ImageIcon icon = new ImageIcon(
+                Guerreiro.class.getResource("/img/oraculo.jpeg")
+            );
+
+            JOptionPane.showMessageDialog(
+                null,
+                frase,
+                "Oráculo",
+                JOptionPane.INFORMATION_MESSAGE,
+                icon
+            );
+        }
+
 	
 	/**
 	 * Este metodo foi criado para mandar uma mensagem com o icone de

@@ -85,7 +85,7 @@ public class Oraculo {
         System.out.println("numero sorteado:" + resposta);
         
         //explicar para o usuario o jogo 
-            InOut.MsgSemIcone(this.nome, "Neste nível você deve acertar qual número foi sorteado de 1 a 100");
+            InOut.iconeOraculo(this.nome, "Neste nível você deve acertar qual número foi sorteado de 1 a 100");
         
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
