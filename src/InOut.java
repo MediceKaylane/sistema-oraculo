@@ -256,6 +256,27 @@ public class InOut {
                 icon
             );
         }
+        
+        public static String leStringGuerreiro(String frase){
+            String Entrada;
+
+            ImageIcon icon = new ImageIcon(
+                Guerreiro.class.getResource("/img/guerreiro.jpeg")
+            );
+
+            Entrada = (String) JOptionPane.showInputDialog( 
+                null, 
+                frase, 
+                "Entrada de dados", 
+                JOptionPane.QUESTION_MESSAGE, 
+                icon, 
+                null, 
+                null 
+            ); 
+            return Entrada;
+        }
+        
+        
 
         public static void iconeOraculo(String nome, String frase){
 
@@ -270,6 +291,25 @@ public class InOut {
                 JOptionPane.INFORMATION_MESSAGE,
                 icon
             );
+        }
+        
+        public static String leStringOraculo(String frase){
+            String Entrada;
+
+            ImageIcon icon = new ImageIcon(
+                Guerreiro.class.getResource("/img/oraculo.jpeg")
+            );
+
+            Entrada = (String) JOptionPane.showInputDialog( 
+                null, 
+                frase, 
+                "Entrada de dados", 
+                JOptionPane.QUESTION_MESSAGE, 
+                icon, 
+                null, 
+                null 
+            ); 
+            return Entrada;
         }
 
 	
