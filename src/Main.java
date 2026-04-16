@@ -28,6 +28,9 @@ void main() {
     bolsaGuerreiro.item.add(item5);
     bolsaGuerreiro.item.add(item6);
     
+    
+    Musica.tocar("src/musica/Musica Background.wav");
+    
     //Objeto guerreiro: Já atribuindo o seu nome pelo o usuario e atribuindo o objeto bolsa a ele
     Guerreiro guerreiro = new Guerreiro (InOut.leStringGuerreiro("Insira o nome do guerreiro:"), bolsaGuerreiro);
     do{
@@ -48,8 +51,6 @@ void main() {
         }
     }
     while(oraculo.verificarNome() == false);
-    
-    Musica.tocar("src/Musica Background.wav");
     
     oraculo.loadLevel01();
     oraculo.loadLevel02();
