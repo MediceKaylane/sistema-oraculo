@@ -65,6 +65,17 @@ public class Oraculo {
         }
     }
     
+    public boolean decidirVidaExtra(String pedidoMisericordia){
+        boolean vidaExtra = false;
+        
+        if(pedidoMisericordia.length() > 5){
+            warrior.aumentarVida();
+            vidaExtra = true;
+        }
+        
+        return vidaExtra;
+    }
+    
 
     
     public boolean loadLevel01 (){
@@ -78,7 +89,11 @@ public class Oraculo {
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
             
-            if(warrior.getQntdVidas() == 0){                                          //Avisa que o jogador perdeu e encerra o programa caso as vidas
+            if(warrior.getQntdVidas() == 0){                                            //Avisa que o jogador perdeu e encerra o programa caso as vidas
+                if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                
                 InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        //tenham acabado
                 System.exit(0);
             }
@@ -171,6 +186,10 @@ public class Oraculo {
             //Enquanto o jogador não acertar, a oráculo vai continuar pedindo a resposta até que ele não tenha mais vidas
             while(true){
                 if(warrior.getQntdVidas() == 0){
+                    if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                    
                     InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
                     System.exit(0);
                 }
@@ -342,6 +361,10 @@ public class Oraculo {
         do
         {
             if(warrior.getQntdVidas() == 0){
+                if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                
                 InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
                 System.exit(0);
             }
@@ -394,6 +417,10 @@ public class Oraculo {
         do
         {
             if(warrior.getQntdVidas() == 0){
+                if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                
                 InOut.MsgDeErro(this.nome, "Suas vidas acabaram! Você perdeu!");        
                 System.exit(0);
             }

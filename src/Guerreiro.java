@@ -13,6 +13,7 @@ public class Guerreiro {
    private int qntdVidas;
    private int vidaInicial;
    private Bolsa myBolsa; 
+   private boolean pedidoMisericordia = false;
 
     public Guerreiro(String nome, Bolsa myBolsa) {
         this.nome = nome;
@@ -52,6 +53,11 @@ public class Guerreiro {
         return qntdVidas;
     }
 
+    public boolean isPedidoMisericordia() {
+        return pedidoMisericordia;
+    }
+    
+
     
     public int getVidaInicial() {
         return vidaInicial;
@@ -77,6 +83,12 @@ public class Guerreiro {
     public boolean itemEquipado (int itemId)
     {
         return myBolsa.itemEquipado(itemId);
+    }
+    
+    public String vidaExtra(){
+        InOut.MsgSemIcone("Oráculo", "Suas vidas acabaram, você deseja misericórdia?");
+        this.pedidoMisericordia = true;
+        return InOut.leString("Faça seu pedido de misericórdia");
     }
    
 }
