@@ -85,9 +85,9 @@ public class Oraculo {
         System.out.println("numero sorteado:" + resposta);
         
         //explicar para o usuario o jogo 
-            InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. Anos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
-            InOut.iconeOraculo(this.nome, "Sua saída é composta de 3 desafios: A passagem pela ruína da tribo antiga, os abismos onde a gravidade não existe e a luta contra os guardas do portal.");
-            InOut.iconeOraculo(this.nome, "No primeiro desafio você deve acertar qual número foi sorteado de 1 a 100 para a tribo liberar sua passagem para o abismo");
+            InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. \nAnos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
+            InOut.iconeOraculo(this.nome, "Sua saída é composta de 3 desafios:\nA passagem pela ruína da tribo antiga, \nOs abismos onde a gravidade não existe  \nA luta contra os guardas do portal.");
+            InOut.iconeOraculo(this.nome, "No primeiro desafio você deve acertar: \nQual número foi sorteado de 1 a 100 para a tribo liberar sua passagem para o abismo");
         
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
@@ -97,7 +97,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                 
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu!");        //tenham acabado
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        //tenham acabado
                 System.exit(0);
             }
             
@@ -194,7 +194,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                     
-                    InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu e fica no Mundo Perdido comigo!");        
+                    InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        
                     System.exit(0);
                 }
                 
@@ -369,7 +369,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                 
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu!");        
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        
                 System.exit(0);
             }
             
@@ -425,7 +425,7 @@ public class Oraculo {
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                 
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! Você perdeu e fica aqui no Mundo Perdido comigo!");        
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica aqui no Mundo Perdido comigo!");        
                 System.exit(0);
             }
             
@@ -477,7 +477,7 @@ public class Oraculo {
         }
         while(soma < 300);
         
-        InOut.iconeOraculo(this.nome, "Missão concluída! Você venceu todos os desafios e tem acesso liberado ao Novo Mundo " + warrior.getNome() + "!\nAté a próxima jornada!");
+        InOut.iconeOraculo(this.nome, "Missão concluída! \nVocê venceu todos os desafios e tem acesso liberado ao Novo Mundo " + warrior.getNome() + "!\nAté a próxima jornada!");
         
         
         return level03Completo = true;
