@@ -130,7 +130,6 @@ public class Oraculo {
                     }
                     
                   warrior.diminuirVida();                     //Guerreiro perde uma vida e tentativas do nível 1 aumenta
-                  InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
                   tentativasLevel01++;
                 }
         }
