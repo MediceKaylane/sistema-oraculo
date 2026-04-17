@@ -332,7 +332,7 @@ public class InOut {
             JOptionPane.showMessageDialog(
                 null,
                 frase,
-                "Oráculo",
+                "Oráculo " + nome,
                 JOptionPane.INFORMATION_MESSAGE,
                 icon
             );
