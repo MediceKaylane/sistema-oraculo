@@ -59,7 +59,6 @@ public class Oraculo {
     //tratamento de erro nome oraculo
     public boolean verificarNome (){
         if(this.nome.isBlank() || this.nome.isEmpty()){
-            InOut.MsgDeAviso("Nome Inválido!", "Dê um nome para o coitado");
             return false;
         }
         else{
@@ -93,12 +92,12 @@ public class Oraculo {
         
         for(int i = 0; i < warrior.getVidaInicial() + 1; i++){
             
-            if(warrior.getQntdVidas() == 0){                                            //Avisa que o jogador perdeu e encerra o programa caso as vidas
+            if(warrior.getQntdVidas() == 0){                                            //Avisa que o jogador perdeu e encerra o programa caso as vidas tenham acabado
                 if(warrior.isPedidoMisericordia() == false){
                     this.decidirVidaExtra(warrior.vidaExtra());
                 }
                 
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        //tenham acabado
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        
                 System.exit(0);
             }
             
@@ -130,7 +129,6 @@ public class Oraculo {
                     }
                     
                   warrior.diminuirVida();                     //Guerreiro perde uma vida e tentativas do nível 1 aumenta
-                  InOut.MsgSemIcone(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
                   tentativasLevel01++;
                 }
         }
