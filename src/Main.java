@@ -56,12 +56,13 @@ void main() {
     oraculo.prologoIntroducao();
     
     //níveis
-    oraculo.loadLevel01();
-    oraculo.loadLevel02();
-    oraculo.loadLevel03();
+    for(int i = 0; i < 2; i++){
+        oraculo.loadLevel01();
+        oraculo.loadLevel02();
+        oraculo.loadLevel03();
+        oraculo.vencedor();
     
-    //relatorio 
-    oraculo.relatorioPartida();
-    
-    
+        //relatorio 
+        oraculo.relatorioPartida();
+    } 
 }

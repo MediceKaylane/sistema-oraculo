@@ -252,8 +252,8 @@ public class Oraculo {
             switch(i){
                 case 0:
                     if(warrior.itemEquipado(6)){
-                        InOut.iconeOraculo("Pedra Supreme", "Tua precisão não passou despercebida… por isso, foste agraciado com o poder da "
-                                + "Pedra Suprema que lhe concede a resposta da proxima charada.");
+                        InOut.iconeOraculo("Pedra Supreme", "Tua precisão no desafio anterior não passou despercebida… por isso, foste agraciado com o poder da "
+                                + "Pedra Suprema que lhe concede a resposta dessa charada!");
                         InOut.iconeOraculo("Pedra Supreme", "buraco");
                     }
                 case 1:
