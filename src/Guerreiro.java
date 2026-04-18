@@ -115,6 +115,11 @@ public class Guerreiro {
         myBolsa.equiparItem(itemId);
     }
     
+    public void desequiparItem (int itemId)
+    {
+        myBolsa.desequiparItem(itemId);
+    }
+    
     /**
      * 
      * @param itemId

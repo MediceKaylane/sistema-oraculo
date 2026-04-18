@@ -22,6 +22,10 @@ public class Bolsa {
         item.get(itemId).equipar();
     }
     
+    public void desequiparItem (int itemId) {
+        item.get(itemId).desequipar();
+    }
+    
     /**
      * 
      * @param itemId

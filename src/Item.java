@@ -29,6 +29,11 @@ public class Item {
         System.out.println("item e se esta equipado:" + tipoItem + equipado);
     }
     
+    public void desequipar(){      //Desequipa o item
+        this.equipado = false;
+        System.out.println("item e se esta equipado:" + tipoItem + equipado);
+    }
+    
     public boolean itemEquipado(){
         return this.equipado;
     }

@@ -343,6 +343,7 @@ public class Oraculo {
                  InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
                  palavrasRodadas.addAll(palavrasUsadas);
                  palavrasUsadas.clear();
+                 break;
                 }
                 else if(soma < 300){
                     InOut.iconeOraculo("Não desista!", "Sua pontuação atual: " + soma + " pontos");
@@ -657,6 +658,10 @@ public class Oraculo {
         }
         
         //Se o jogador passou por todas as charadas, define levelCompleto como true
+        warrior.desequiparItem(0);
+        warrior.desequiparItem(2);
+        warrior.desequiparItem(3);
+        warrior.desequiparItem(4);
         levelCompleto = true;
         
         InOut.iconeOraculo(this.nome, "Você acertou todas?\nMeus parabéns, Essas não estavam tão faceis assim! Agora você pode enfrentar os guardas do portal e ser livre!!");
