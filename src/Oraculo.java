@@ -98,7 +98,7 @@ public class Oraculo {
     }
     
     /**
-     * 
+     * Contextualiza os personagens e o jogo
      */
     public void prologoIntroducao (){
         InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. \nAnos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
@@ -133,6 +133,334 @@ public class Oraculo {
         InOut.iconeOraculo(this.nome, "Sem forças para prosseguir, o Guerreiro" + warrior.getNome() +
                 "sucumbe aos desafios e permanece no Mundo Perdido, esquecido pelo destino.");
     }
+     
+     /**
+      * Carrega todas as palavras válidas a partir de um arquivo de texto
+      * e armazena em um Set para evitar duplicatas e permitir busca rápida.
+      *
+      * Cada linha do arquivo representa uma palavra do dicionário.
+      * Linhas vazias são ignoradas.
+      *
+      * @return um Set contendo todas as palavras válidas do dicionário
+      */
+     private Set<String> carregarDicionario(){
+         
+         Set<String> dicionario = new HashSet<>(); 
+        
+        //abrindo br-sem-acentos.txt e passando para o hash dicionario
+        
+        try  //try: tenta isso e se der errado joga no exception erro
+        {
+            File arq = new File("src/br-sem-acentos.txt"); //obj aponta para o arquivo txt
+            Scanner leitorArq = new Scanner (arq); //fopen(arq, "r");
+            
+            //hashset p/ armazenar dicionario e a leitura ser instatanea
+            while (leitorArq.hasNextLine()) //nextline "ainda tem linha para ler?"
+            {
+                String palavraDicio = leitorArq.nextLine().trim(); //le ate a prox line e remove espaços antes/depois da palavra
+                
+                if(!palavraDicio.isEmpty())
+                {
+                    dicionario.add(palavraDicio);
+                }
+                
+            }
+            leitorArq.close(); //fecha o arquivo
+        }
+        catch(Exception erro)
+        {
+            InOut.iconeOraculo("opss, deu red", erro.getMessage());
+        }
+        return dicionario;
+     }
+     
+     
+     /**
+      * Cria e inicializa a tabela de pontuação das letras do jogo.
+      *
+      * Cada caractere é associado a um valor inteiro que será utilizado
+      * para calcular a pontuação total das palavras inseridas pelo jogador.
+      *
+      * @return um Map contendo as letras e suas respectivas pontuações
+      */
+     private Map<Character, Integer> carregarTabelaPontuacao (){
+         
+         // Criando a tabela de pontuação
+        Map<Character, Integer> tabelaPontuacao = new HashMap<>();
+
+        // Adicionando as pontuações
+        tabelaPontuacao.put('a', 10);
+        tabelaPontuacao.put('b', 30);
+        tabelaPontuacao.put('c', 30);
+        tabelaPontuacao.put('d', 20);
+        tabelaPontuacao.put('e', 10);
+        tabelaPontuacao.put('f', 40);
+        tabelaPontuacao.put('g', 20);
+        tabelaPontuacao.put('h', 20);
+        tabelaPontuacao.put('i', 40);
+        tabelaPontuacao.put('j', 10);
+        tabelaPontuacao.put('k', 80);
+        tabelaPontuacao.put('l', 50);
+        tabelaPontuacao.put('m', 10);
+        tabelaPontuacao.put('n', 30);
+        tabelaPontuacao.put('o', 10);
+        tabelaPontuacao.put('p', 10);
+        tabelaPontuacao.put('q', 90);
+        tabelaPontuacao.put('r', 10);
+        tabelaPontuacao.put('s', 10);
+        tabelaPontuacao.put('t', 10);
+        tabelaPontuacao.put('u', 10);
+        tabelaPontuacao.put('v', 80);
+        tabelaPontuacao.put('w', 100);
+        tabelaPontuacao.put('x', 70);
+        tabelaPontuacao.put('y', 100);
+        tabelaPontuacao.put('z', 50);
+        
+        return tabelaPontuacao;
+     }
+     
+     
+     /**
+      * Exibe a introdução do nível 3 ao jogador.
+      *
+      * Apresenta o contexto do desafio, explica as regras de pontuação
+      * das palavras e fornece dicas estratégicas para o jogador.
+      */
+     private void introducaoNivel3(){
+         
+        //introducao level03
+        InOut.iconeOraculo(this.nome, "Uau, você chegou no último desafio! Vamos enfrentar esses guardas!!");
+        InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");    
+            
+        //explicacao do game com um obs palavras sem potuacao 
+        InOut.iconeOraculo(this.nome, "Agora vamos entender como esse desafio funciona");
+        InOut.iconeOraculo(this.nome, "Você insere no portal celeste uma palavra sem acentos mesmo se ela tiver.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
+        InOut.iconeOraculo(this.nome, "Você está na era medieval nem todas as palavras do seu mundo eles reconhecem");
+        InOut.iconeOraculo("DICA:", "Nem sempre a palavra mais longa vence: \nuse letras raras para alcançar pontuações maiores.");
+         
+     }
+     
+     private void nivel03Fase1(Set<String> dicionario, Map<Character, Integer> tabelaPontuacao) {
+         //1 fase, escreve o tanto que quiser até chegar a 100 pontos
+        InOut.iconeOraculo(this.nome, "Sua palavra deve ter uma pontuação total de 100 pontos\nEu sei, você não sabe os pontos de cada letra...\nEntão tente deduzir!");
+        
+        //fase 1
+        int soma = 0;
+        String palavra;
+        do
+        {
+            if(warrior.getQntdVidas() == 0){
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram!");
+                perdedor();
+                System.exit(0);
+             }
+               while(true){
+                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
+                
+                    if(palavrasUsadas.contains(palavra)){
+                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
+                    }
+                    else{break;}
+                }
+                
+                
+             
+             if(dicionario.contains(palavra))
+             {
+                for(char letra : palavra.toCharArray()){
+                    if (tabelaPontuacao.containsKey(letra)){
+                        Integer valor = tabelaPontuacao.get(letra);
+                        soma += valor;
+                    }
+                }
+                palavrasUsadas.add(palavra);
+             }
+             else{
+                 InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida");
+                 ++tentativas;
+                 InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+             }
+             
+             if(soma >= 100){
+                 InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
+                 palavrasRodadas.addAll(palavrasUsadas);
+                 palavrasUsadas.clear();
+             }
+             else if (soma != 0){
+                 InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
+                 warrior.diminuirVida();
+                 ++tentativas;
+             }
+        }
+        while(soma < 100); 
+     }
+     
+      private void nivel03Fase2(Set<String> dicionario, Map<Character, Integer> tabelaPontuacao) {
+        //fase 2
+        int soma = 0;
+        String palavra;
+        
+        //fase 2 tem 3 chances se as palavras nao somarem 600 pontos perde uma vida
+        InOut.iconeOraculo(this.nome, "Esta fase contém 3 rodadas.\nAo total sua pontuação deve ser maior ou igual a 600");
+        
+        do
+        {
+            if(warrior.getQntdVidas() == 0){
+                if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        
+                System.exit(0);
+            }
+            
+            soma = 0;
+            for(int i = 0; i < 3; i++){
+                while(true){
+                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
+                
+                    if(palavrasUsadas.contains(palavra) || palavrasRodadas.contains(palavra)){
+                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
+                    }
+                    else{break;}
+                }
+
+                if(dicionario.contains(palavra))
+                {
+                    for(char letra : palavra.toCharArray()){
+                        if (tabelaPontuacao.containsKey(letra)){
+                            Integer valor = tabelaPontuacao.get(letra);
+                            soma += valor;
+                        }
+                    }
+                    palavrasUsadas.add(palavra);
+                }
+                else{
+                    InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida.");  
+                }
+                
+                if(soma >= 600){
+                 InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
+                 palavrasRodadas.addAll(palavrasUsadas);
+                 palavrasUsadas.clear();
+                }
+                else if(soma < 300){
+                    InOut.iconeOraculo("Não desista!", "Sua pontuação atual: " + soma + " pontos");
+                }
+                else{
+                    InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
+                }
+            }
+            
+            if(soma < 600){
+               
+                warrior.diminuirVida();
+                ++tentativas;
+                if(warrior.getQntdVidas() != 0){
+                    InOut.iconeOraculo(this.nome, "Tente essa fase novamente, você vai conseguir!");
+                    InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+                } 
+                palavrasUsadas.clear();
+            }
+             
+             
+        }
+        while(soma < 600);
+        
+        
+      }
+      
+      private void nivel03Fase3(Set<String> dicionario, Map<Character, Integer> tabelaPontuacao) {
+          
+        //fase 3 
+        int soma = 0;
+        String palavra;
+        
+        //fase 3 digitar duas palavras acima de 300 pontos mas a palavra tem que ter no maximo 6 letras
+        InOut.iconeOraculo(this.nome, "Esta fase contém 2 rodadas.\nAo total sua pontuação deve ser maior ou igual a 300");
+        InOut.iconeOraculo(this.nome, "Achou fácil?\nNão se empolgue..");
+        InOut.iconeOraculo(this.nome, "Sua palavra pode ter no máximo 6 letras");
+        
+        
+        do
+        {
+            if(warrior.getQntdVidas() == 0){
+                if(warrior.isPedidoMisericordia() == false){
+                    this.decidirVidaExtra(warrior.vidaExtra());
+                }
+                
+                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica aqui no Mundo Perdido comigo!");        
+                System.exit(0);
+            }
+            
+            soma = 0;
+            for(int i = 0; i < 2; i++){
+                        
+                while(true){
+                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
+                
+                    if(palavrasUsadas.contains(palavra)|| palavrasRodadas.contains(palavra)){
+                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
+                    }
+                    else{break;}
+                }
+ 
+                
+                if(palavra.length() <= 6){
+                    if(dicionario.contains(palavra))
+                    {
+                        for(char letra : palavra.toCharArray()){
+                            if (tabelaPontuacao.containsKey(letra)){
+                                Integer valor = tabelaPontuacao.get(letra);
+                                soma += valor;
+                            }
+                        } 
+                    palavrasUsadas.add(palavra);
+                    }
+                    else{
+                        InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida.");  
+                    } 
+                    
+                    if(soma >= 300){
+                        InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
+                        palavrasRodadas.add(palavra);
+                        palavrasUsadas.clear();
+                    }
+                    else if(soma < 150){
+                        InOut.iconeOraculo("Não desista!", "Sua pontuação atual: " + soma + " pontos");
+                    }
+                    else{
+                        InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
+                    }
+
+                }
+                else{
+                    InOut.iconeOraculo("Palavra inválida!", "Sua palavra deve conter no máximo 6 letras!");
+                }
+                
+            }
+            
+            if(soma < 300){
+                warrior.diminuirVida();
+                ++tentativas;
+                if(warrior.getQntdVidas() != 0){
+                    InOut.iconeOraculo(this.nome, "Tente essa fase novamente, você vai conseguir!");
+                    InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+                }
+               palavrasUsadas.clear();
+                
+            }
+             
+             
+            
+            
+        }
+        while(soma < 300);
+        
+        InOut.iconeOraculo(this.nome, "Missão concluída! \nVocê venceu todos os desafios e tem acesso liberado ao Novo Mundo " + warrior.getNome() + "!\nAté a próxima jornada!");
+        
+    }
+    
 
 
     /**
@@ -341,282 +669,28 @@ public class Oraculo {
      */
     public boolean loadLevel03 () {
         
-        tentativas = 0;
         boolean level03Completo = false;
-        String palavra;
         
-        //hashset p/ armazenar dicionario e a leitura ser instatanea
-        Set<String> dicionario = new HashSet<>(); 
+        //metodo carregar dicionario 
+        Set<String> dicionario = carregarDicionario();
         
-        //abrindo br-sem-acentos.txt e passando para o hash dicionario
+        //tabela pontuacao
+        Map<Character, Integer> tabelaPontuacao = carregarTabelaPontuacao();
         
-        try  //try: tenta isso e se der errado joga no exception erro
-        {
-            File arq = new File("src/br-sem-acentos.txt"); //obj aponta para o arquivo txt
-            Scanner leitorArq = new Scanner (arq); //fopen(arq, "r");
-            
-            while (leitorArq.hasNextLine()) //nextline "ainda tem linha para ler?"
-            {
-                String palavraDicio = leitorArq.nextLine().trim(); //le ate a prox line e remove espaços antes/depois da palavra
-                
-                if(!palavraDicio.isEmpty())
-                {
-                    dicionario.add(palavraDicio);
-                }
-                
-            }
-            leitorArq.close(); //fecha o arquivo
-        }
-        catch(Exception erro)
-        {
-            InOut.iconeOraculo("opss, deu red", erro.getMessage());
-        }
+        //explicao da fase
+        introducaoNivel3();
         
-        // Criando a tabela de pontuação
-        Map<Character, Integer> tabelaPontuacao = new HashMap<>();
-
-        // Adicionando as pontuações
-        tabelaPontuacao.put('a', 10);
-        tabelaPontuacao.put('b', 30);
-        tabelaPontuacao.put('c', 30);
-        tabelaPontuacao.put('d', 20);
-        tabelaPontuacao.put('e', 10);
-        tabelaPontuacao.put('f', 40);
-        tabelaPontuacao.put('g', 20);
-        tabelaPontuacao.put('h', 20);
-        tabelaPontuacao.put('i', 40);
-        tabelaPontuacao.put('j', 10);
-        tabelaPontuacao.put('k', 80);
-        tabelaPontuacao.put('l', 50);
-        tabelaPontuacao.put('m', 10);
-        tabelaPontuacao.put('n', 30);
-        tabelaPontuacao.put('o', 10);
-        tabelaPontuacao.put('p', 10);
-        tabelaPontuacao.put('q', 90);
-        tabelaPontuacao.put('r', 10);
-        tabelaPontuacao.put('s', 10);
-        tabelaPontuacao.put('t', 10);
-        tabelaPontuacao.put('u', 10);
-        tabelaPontuacao.put('v', 80);
-        tabelaPontuacao.put('w', 100);
-        tabelaPontuacao.put('x', 70);
-        tabelaPontuacao.put('y', 100);
-        tabelaPontuacao.put('z', 50);
+        //fase 01
+        nivel03Fase1(dicionario, tabelaPontuacao);
         
-        //Entrada do usuario 
-        int soma = 0;
-            //introducao level03
-            InOut.iconeOraculo(this.nome, "Uau, você chegou no último desafio! Vamos enfrentar esses guardas!!");
-            InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
-            
-            
-            //explicacao do game com um obs palavras sem potuacao 
-            InOut.iconeOraculo(this.nome, "Agora vamos entender como esse desafio funciona");
-            InOut.iconeOraculo(this.nome, "Você insere no portal celeste uma palavra sem acentos mesmo se ela tiver.\nCada letra tem uma pontuação diferente.\nA soma do ponto de cada letra determina sua pontuação final!");
-            InOut.iconeOraculo(this.nome, "Você está na era medieval nem todas as palavras do seu mundo eles reconhecem");
-            InOut.iconeOraculo("DICA:", "Nem sempre a palavra mais longa vence: \nuse letras raras para alcançar pontuações maiores.");
-            
-            
-        //1 fase, escreve o tanto que quiser até chegar a 100 pontos
-        InOut.iconeOraculo(this.nome, "Sua palavra deve ter uma pontuação total de 100 pontos\nEu sei, você não sabe os pontos de cada letra...\nEntão tente deduzir!");
-        //fase 1
-        do
-        {
-            if(warrior.getQntdVidas() == 0){
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram!");
-                perdedor();
-                System.exit(0);
-             }
-               while(true){
-                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
-                
-                    if(palavrasUsadas.contains(palavra)){
-                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
-                    }
-                    else{break;}
-                }
-                
-                
-             
-             if(dicionario.contains(palavra))
-             {
-                for(char letra : palavra.toCharArray()){
-                    if (tabelaPontuacao.containsKey(letra)){
-                        Integer valor = tabelaPontuacao.get(letra);
-                        soma += valor;
-                    }
-                }
-                palavrasUsadas.add(palavra);
-             }
-             else{
-                 InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida");
-                 ++tentativas;
-                 InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
-             }
-             
-             if(soma >= 100){
-                 InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
-                 palavrasRodadas.addAll(palavrasUsadas);
-                 palavrasUsadas.clear();
-             }
-             else if (soma != 0){
-                 InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
-                 warrior.diminuirVida();
-                 ++tentativas;
-             }
-        }
-        while(soma < 100);
+        //fase 02
+        nivel03Fase2(dicionario, tabelaPontuacao);
         
-        //2 fase tem 3 chances se as palavras nao somarem 600 pontos perde uma vida
-        InOut.iconeOraculo(this.nome, "Esta fase contém 3 rodadas.\nAo total sua pontuação deve ser maior ou igual a 600");
-        do
-        {
-            if(warrior.getQntdVidas() == 0){
-                if(warrior.isPedidoMisericordia() == false){
-                    this.decidirVidaExtra(warrior.vidaExtra());
-                }
-                
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica no Mundo Perdido comigo!");        
-                System.exit(0);
-            }
-            
-            soma = 0;
-            for(int i = 0; i < 3; i++){
-                while(true){
-                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
-                
-                    if(palavrasUsadas.contains(palavra) || palavrasRodadas.contains(palavra)){
-                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
-                    }
-                    else{break;}
-                }
-
-                if(dicionario.contains(palavra))
-                {
-                    for(char letra : palavra.toCharArray()){
-                        if (tabelaPontuacao.containsKey(letra)){
-                            Integer valor = tabelaPontuacao.get(letra);
-                            soma += valor;
-                        }
-                    }
-                    palavrasUsadas.add(palavra);
-                }
-                else{
-                    InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida.");  
-                }
-                
-                if(soma >= 600){
-                 InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
-                 palavrasRodadas.addAll(palavrasUsadas);
-                 palavrasUsadas.clear();
-                }
-                else if(soma < 300){
-                    InOut.iconeOraculo("Não desista!", "Sua pontuação atual: " + soma + " pontos");
-                }
-                else{
-                    InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
-                }
-            }
-            
-            if(soma < 600){
-               
-                warrior.diminuirVida();
-                ++tentativas;
-                if(warrior.getQntdVidas() != 0){
-                    InOut.iconeOraculo(this.nome, "Tente essa fase novamente, você vai conseguir!");
-                    InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
-                } 
-                palavrasUsadas.clear();
-            }
-             
-             
-        }
-        while(soma < 600);
-        
-        //fase precisao: digitar duas palavras acima de 300 pontos mas a palavra tem que ter no maximo 6 letras
-        InOut.iconeOraculo(this.nome, "Esta fase contém 2 rodadas.\nAo total sua pontuação deve ser maior ou igual a 300");
-        InOut.iconeOraculo(this.nome, "Achou fácil?\nNão se empolgue..");
-        InOut.iconeOraculo(this.nome, "Sua palavra pode ter no máximo 6 letras");
-        do
-        {
-            if(warrior.getQntdVidas() == 0){
-                if(warrior.isPedidoMisericordia() == false){
-                    this.decidirVidaExtra(warrior.vidaExtra());
-                }
-                
-                InOut.iconeOraculo(this.nome, "Suas vidas acabaram! \nVocê perdeu e fica aqui no Mundo Perdido comigo!");        
-                System.exit(0);
-            }
-            
-            soma = 0;
-            for(int i = 0; i < 2; i++){
-                        
-                while(true){
-                    palavra = InOut.leStringGuerreiro("Insira sua palavra:").toLowerCase();
-                
-                    if(palavrasUsadas.contains(palavra)|| palavrasRodadas.contains(palavra)){
-                        InOut.iconeOraculo(this.nome, "Você já usou essa palavra, seja mais criativo.");
-                    }
-                    else{break;}
-                }
- 
-                
-                if(palavra.length() <= 6){
-                    if(dicionario.contains(palavra))
-                    {
-                        for(char letra : palavra.toCharArray()){
-                            if (tabelaPontuacao.containsKey(letra)){
-                                Integer valor = tabelaPontuacao.get(letra);
-                                soma += valor;
-                            }
-                        } 
-                    palavrasUsadas.add(palavra);
-                    }
-                    else{
-                        InOut.iconeOraculo("Palavra inválida!", "Eles estavam preparados para isso...\nDigite uma palavra válida.");  
-                    } 
-                    
-                    if(soma >= 300){
-                        InOut.iconeOraculo("Parabéns!", "Você passou dessa fase com " + soma + " pontos");
-                        palavrasRodadas.add(palavra);
-                        palavrasUsadas.clear();
-                    }
-                    else if(soma < 150){
-                        InOut.iconeOraculo("Não desista!", "Sua pontuação atual: " + soma + " pontos");
-                    }
-                    else{
-                        InOut.iconeOraculo("Quase lá..", "Sua pontuação atual: " + soma + " pontos");
-                    }
-
-                }
-                else{
-                    InOut.iconeOraculo("Palavra inválida!", "Sua palavra deve conter no máximo 6 letras!");
-                }
-                
-            }
-            
-            if(soma < 300){
-                warrior.diminuirVida();
-                ++tentativas;
-                if(warrior.getQntdVidas() != 0){
-                    InOut.iconeOraculo(this.nome, "Tente essa fase novamente, você vai conseguir!");
-                    InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
-                }
-               palavrasUsadas.clear();
-                
-            }
-             
-             
-            
-            
-        }
-        while(soma < 300);
-        
-        InOut.iconeOraculo(this.nome, "Missão concluída! \nVocê venceu todos os desafios e tem acesso liberado ao Novo Mundo " + warrior.getNome() + "!\nAté a próxima jornada!");
+        //fase 03
+        nivel03Fase3(dicionario, tabelaPontuacao);
         
         
         return level03Completo = true;
         
-    }
-       
+    }    
 }
