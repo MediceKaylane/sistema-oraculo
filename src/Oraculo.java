@@ -43,7 +43,7 @@ public class Oraculo {
     }
     
     //tratamento de erro nome oraculo
-    public void getName (String name){
+    public void atribuirNome (String name){
         this.nome = name; 
     }
 
@@ -78,6 +78,13 @@ public class Oraculo {
         return vidaExtra;
     }
     
+    public void prologoIntroducao (){
+        InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. \nAnos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
+        InOut.iconeOraculo(this.nome, "Sua saída é composta de 3 desafios:\nA passagem pela ruína da tribo antiga, \nOs abismos onde a gravidade não existe  \nA luta contra os guardas do portal.");
+        InOut.iconeOraculo(this.nome, "O Oráculo " + this.nome + "\n" +
+        "acolhe o valente Guerreiro " + warrior.getNome() +
+        ", que inicia sua jornada com " + warrior.getQntdVidas() + " vidas sob seu destino.");
+    }
 
     
     public boolean loadLevel01 (){
@@ -85,9 +92,7 @@ public class Oraculo {
         int resposta = random.nextInt(99) + 1;
         System.out.println("numero sorteado:" + resposta);
         
-        //explicar para o usuario o jogo 
-            InOut.iconeOraculo(this.nome, "Sei que você não se lembra de nada...mas eu vou te ajudar a sair desse lugar. \nAnos atrás o mundo foi repartido em dois e você ficou aqui comigo... no Mundo Perdido");
-            InOut.iconeOraculo(this.nome, "Sua saída é composta de 3 desafios:\nA passagem pela ruína da tribo antiga, \nOs abismos onde a gravidade não existe  \nA luta contra os guardas do portal.");
+        //explicar para o usuario o jogo
             InOut.iconeOraculo(this.nome, "No primeiro desafio você deve acertar: \nQual número foi sorteado de 1 a 100 para a tribo liberar sua passagem para o abismo");
         
         
@@ -103,7 +108,10 @@ public class Oraculo {
             }
             
             //qtnd vidas do usuario
-            InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+            if(i != 0){
+                InOut.iconeOraculo(this.nome, "Sua quantidade de vidas atual: " + warrior.getQntdVidas() + " vidas.");
+            }
+            
             
             
             
@@ -171,7 +179,8 @@ public class Oraculo {
             switch(i){
                 case 0:
                     if(warrior.itemEquipado(6)){
-                        InOut.iconeOraculo("Pedra Supreme", "Como acertou o número de primeira concedo-lhes a resposta dessa charada com o poder da Pedra Supreme");
+                        InOut.iconeOraculo("Pedra Supreme", "Tua precisão não passou despercebida… por isso, foste agraciado com o poder da "
+                                + "Pedra Suprema que lhe concede a resposta da proxima charada.");
                         InOut.iconeOraculo("Pedra Supreme", "buraco");
                     }
                 case 1:

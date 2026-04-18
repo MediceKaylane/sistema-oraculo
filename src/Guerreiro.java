@@ -22,7 +22,7 @@ public class Guerreiro {
     }
     
     //tratamento de erro nome oraculo
-    public void getName (String name){
+    public void atribuirNome (String name){
         this.nome = name; 
     }
     

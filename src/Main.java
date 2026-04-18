@@ -36,7 +36,7 @@ void main() {
     do{
         if(guerreiro.verificarNome() == false){
         
-        guerreiro.getName(InOut.leStringOraculo("Insira o nome do Guerreiro novamente:")); //tratamento de erro nome guerreiro
+        guerreiro.atribuirNome(InOut.leStringGuerreiro("Insira o nome do Guerreiro novamente:")); //tratamento de erro nome guerreiro
         }
     }
     while(guerreiro.verificarNome() == false);
@@ -47,11 +47,15 @@ void main() {
     do{
         if(oraculo.verificarNome() == false){
         
-        oraculo.getName(InOut.leStringOraculo("Insira o nome do Oraculo novamente:")); //tratamento de erro nome oraculo
+        oraculo.atribuirNome(InOut.leStringOraculo("Insira o nome do Oraculo novamente:")); //tratamento de erro nome oraculo
         }
     }
     while(oraculo.verificarNome() == false);
     
+    //Introducao do jogo
+    oraculo.prologoIntroducao();
+    
+    //níveis
     oraculo.loadLevel01();
     oraculo.loadLevel02();
     oraculo.loadLevel03();
