@@ -57,10 +57,18 @@ void main() {
     
     //níveis
     for(int i = 0; i < 2; i++){
+        
+        if(i != 0){
+            InOut.iconeOraculo("Engano", "Julgas ter vencido o destino, guerreiro? Enganas-te… o ciclo apenas recomeça, e as provações tornam a chamar teu nome.");
+        }
         oraculo.loadLevel01();
         oraculo.loadLevel02();
         oraculo.loadLevel03();
-        oraculo.vencedor();
+        
+        if(i != 0){
+           oraculo.vencedor(); 
+        }
+        
     
         //relatorio 
         oraculo.relatorioPartida();
