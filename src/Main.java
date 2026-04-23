@@ -31,6 +31,9 @@ void main() {
     
     Musica.tocar("src/musica/Musica Background.wav");
     
+    Background fundo = new Background();
+    fundo.gerarBack();
+    
     //Objeto guerreiro: Já atribuindo o seu nome pelo o usuario e atribuindo o objeto bolsa a ele
     Guerreiro guerreiro = new Guerreiro (InOut.leStringGuerreiro("Insira o nome do Guerreiro:"), bolsaGuerreiro);
     do{
