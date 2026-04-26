@@ -15,7 +15,6 @@ public class Bolsa {
      * Construtor da classe Bolsa.
      * Inicializa a lista de itens.
      */
-
     public Bolsa() {
         
     }

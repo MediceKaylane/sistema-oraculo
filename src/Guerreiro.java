@@ -184,5 +184,6 @@ public class Guerreiro {
         this.pedidoMisericordia = true;
         return InOut.leStringOraculo("Apresente teu pedido de misericórdia e que ele revele humildade e seja digno de aceitação.");
     }
-   
+
+
 }

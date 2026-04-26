@@ -131,7 +131,6 @@ public class Oraculo {
      * - Respostas das charadas do nível 2
      * - Total de tentativas no nível 3
      */
-    
     public void relatorioPartida(){
         String mensagem = "Ao fim da jornada, revelam-se os feitos do Guerreiro:\n"
             + "As vidas que perdeu: " + warrior.getVidasPerdidas()
@@ -360,7 +359,6 @@ public class Oraculo {
     * - Caso não atinja a pontuação mínima, perde uma vida
     * - Pode tentar novamente enquanto tiver vidas
     */
-     
       private void nivel03Fase2(Set<String> dicionario, Map<Character, Integer> tabelaPontuacao) {
         //fase 2
         int soma = 0;
@@ -450,7 +448,6 @@ public class Oraculo {
     * - Deve usar palavras válidas do dicionário
     * - Se não atingir a pontuação mínima, perde uma vida
     */
-      
       private void nivel03Fase3(Set<String> dicionario, Map<Character, Integer> tabelaPontuacao) {
           
         //fase 3 

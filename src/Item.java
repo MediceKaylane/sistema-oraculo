@@ -67,7 +67,6 @@ public class Item {
      * 
      * @param oraculo objeto que contém o guerreiro
      */
-    
         public void efeitoAdcVida(Oraculo oraculo){
             oraculo.getWarrior().aumentarVida();
         }
