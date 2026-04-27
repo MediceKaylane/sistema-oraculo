@@ -6,10 +6,10 @@
 void main() {
     
      //Objeto Bolsa criado
-     Bolsa bolsaGuerreiro = new Bolsa();  
+     Bolsa bolsaGuerreiro = new Bolsa();
      
      
-    
+     
      //Objetos itens
     Item item0 = new Item (0, "Capacete de Ferro", false);
     Item item1 = new Item(1, "Espada de Ferro", false);
@@ -64,6 +64,7 @@ void main() {
         if(i != 0){
             InOut.iconeOraculo("Engano", "Julgas ter vencido o destino, guerreiro? Enganas-te… o ciclo apenas recomeça, e as provações tornam a chamar teu nome.");
             guerreiro.setPedidoMisericordia(false);
+            guerreiro.setQntdVidas(guerreiro.sortearVidas());
         }
         oraculo.loadLevel01();
         oraculo.loadLevel02();

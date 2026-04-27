@@ -69,6 +69,11 @@ public class Guerreiro {
         return qntdVidas;
     }
 
+    public void setQntdVidas(int qntdVidas) {
+        this.qntdVidas = qntdVidas;
+    }
+    
+
     /**
      * 
      * @return 
